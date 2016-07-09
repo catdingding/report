@@ -1,0 +1,539 @@
+/*
+首頁頁尾
+*/
+header{
+  position: fixed;
+  width: 100%;
+  height: 56px;
+  vertical-align: middle;
+  background-color: #ddd;
+  z-index: 999;
+}
+
+header h1{
+  margin: 0;
+  text-align: left;
+  display: block;
+  float: left;
+  width: 500px;
+  line-height: 55px;
+  font-size: 35px;
+  font-weight: 700;
+  padding-left: 150px;
+}
+
+header h1 a{
+  color: #000;
+}
+
+header h1 a:link,
+header h1 a:visited,
+header h1 a:hover,
+header h1 a:active{
+  text-decoration: none;
+  color: #000;
+}
+
+header > a{
+  float: left;
+  margin-top: 11px;
+  margin-left: 15px;
+}
+
+header+div{
+  height: 56px;
+  margin-bottom: 5px;
+}
+
+footer{
+  width: 100%;
+  height: 65px;
+  background-color: #444;
+  margin-top: 25px;
+  position: relative;
+}
+
+footer div{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #eee;
+  margin: auto;
+  line-height: 24px;
+  height: 48px;
+}
+
+/*
+圖表
+*/
+
+div.chart {
+    width: 100%;
+    height: 470px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #E5E3DF;
+}
+
+#diychart div.chart{
+  margin-top: 60px;
+}
+
+#map {
+    width: 80%;
+    float: left;
+    margin-left: 2%;
+    margin-top: 45px;
+}
+
+#map_table {
+    width: 15%;
+    float: right;
+    margin-right: 2%;
+    margin-top: 45px;
+}
+#map_table::after{
+	content: '';
+	clear: both;
+}
+
+/*
+標題
+*/
+h1,h2,h3,h4,h5,h6 {
+    text-align: center;
+    clear: both;
+}
+
+h2{
+  height: 40px;
+  line-height: 40px;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 15px 0 15px 0;
+}
+
+h2.chart{
+  margin: 55px 0 5px 0 ;
+}
+
+/*
+搜尋區
+*/
+
+label {
+    float: left;
+    line-height: 34px;
+    width: 20%;
+    margin: 0;
+    margin-top: 6px;
+}
+
+#condition form {
+    width: 30%;
+    height: auto;
+    padding-bottom: 10px;
+    margin: 0 0 0 2.5%;
+    float: left;
+}
+
+#condition form:nth-of-type(3) label {
+    width: 30%;
+}
+
+
+
+.form-inline input.form-control,
+.form-inline select.form-control{
+    float: right;
+    width: 70%;
+    margin: 6px 5% 0 0;
+}
+
+.form-inline select.form-control+span {
+    float: right;
+    width: 70% !important;
+    margin: 6px 5% 0 0;
+    height: 34px;
+}
+
+.form-inline select.form-control+span>span>span{
+  height: 34px;
+}
+
+.form-inline input[type="radio"].form-control {
+    width: 50%;
+}
+
+button.send {
+    width: 75%;
+    margin: 10px 12.5% 0 12.5%;
+    font-size: 17px;
+}
+
+/*
+表格公用配置
+*/
+
+table {
+    width: 85%;
+    margin: 0 auto;
+    background-color: #fff;
+    margin-bottom: 25px;
+    border: 0;
+    border-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-all;
+    table-layout: fixed;
+}
+
+th {
+    background-color: #e6eeee;
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 700;
+}
+
+td {
+    color: #3d3d3d;
+    padding: 4px;
+    background-color: #fff;
+    font-size: 16px;
+    line-height: 25px;
+}
+
+/*
+報告搜尋區的結果列表
+*/
+
+#list th {
+  border: 1px solid #fff;
+  font-size: 18px;
+  line-height: 45px;
+}
+
+#list tbody tr:nth-child(even) td{
+    background-color: #fff;
+}
+
+#list tbody tr:nth-child(odd) td{
+    background-color: #C9E0F5;
+}
+
+#list td:nth-child(1) {
+    width: 10%;
+}
+
+#list td:nth-child(2) {
+    width: 40%;
+}
+
+#list td:nth-child(3) {
+    width: 15%;
+    overflow:hidden;  
+    white-space:nowrap;  
+    text-overflow:ellipsis;  
+}
+
+#list td:nth-child(4) {
+    width: 10%;
+}
+
+#list td:nth-child(5) {
+    width: 18%;
+}
+
+#list td:nth-child(6) {
+    width: 7%;
+}
+
+#list th:nth-child(1) {
+    width: 10%;
+}
+
+#list th:nth-child(2) {
+    width: 40%;
+}
+
+#list th:nth-child(3) {
+    width: 15%;
+}
+
+#list th:nth-child(4) {
+    width: 10%;
+}
+
+#list th:nth-child(5) {
+    width: 18%;
+}
+
+#list th:nth-child(6) {
+    width: 7%;
+}
+
+/*
+報告頁面
+*/
+table.report:nth-of-type(1){
+  margin-top: 30px;
+}
+
+table.report td{
+  background-color: #f0f0f6;
+}
+
+table.report:nth-of-type(1) th{
+  width: 15%;
+}
+
+table.report:nth-of-type(1) td{
+  width: 35%;
+}
+
+table.report:nth-of-type(3) th{
+  width: 20%;
+}
+
+table.report:nth-of-type(3) td{
+  width: 80%;
+}
+
+table.report a.btn{
+  width: 70%;
+  margin: 5px 0 5px 0;
+}
+
+table.report:nth-of-type(3) tr:nth-child(3) td{
+  text-align: left;
+  text-indent: 2em;
+}
+
+/*
+排行相關
+*/
+.rank .list th {
+  border: 1px solid #fff;
+  font-size: 18px;
+  line-height: 45px;
+}
+
+.rank .list th:nth-child(1),
+.rank .list td:nth-child(1){
+  width: 15%;
+}
+
+.rank .list th:nth-child(2),
+.rank .list td:nth-child(2){
+  width: 35%;
+}
+
+.rank .list th:nth-child(3),
+.rank .list td:nth-child(3){
+  width: 35%;
+}
+
+.rank .list th:nth-child(4),
+.rank .list td:nth-child(4){
+  width: 15%;
+}
+
+/*
+頁次控制區
+*/
+.page{
+      width: 85%;
+      height: 34px;
+      margin: 0 auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      text-align: center;
+      line-height: 34px;
+}
+
+.page>button:nth-of-type(1){
+      float: left;
+      margin-left: 20%;
+      width: 100px;
+}
+
+.page>button:nth-of-type(2){
+      float: right;
+      margin-right: 20%;
+      width: 100px;
+}
+
+.page span input{
+      height: 26px;
+      width: 55px;
+      line-height: 20px;
+}
+
+.page span button{
+      height: 26px;
+      line-height: 13px;
+      margin-left: 10px;
+}
+
+/*
+tab相關
+*/
+.navbar {
+    margin: 0 auto;
+    height: 36px;
+    width: 85%;
+    margin-top: 20px;
+    padding: 0px;
+}
+
+.navbar li {
+    float: left;
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 100%;
+    margin-left: 3%;
+    line-height: 36px;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #4169E1;
+    margin-top: 1px;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 -12px 10px -10px #333 inset;
+}
+
+.navbar .select {
+    background-color: #fff;
+    cursor: text;
+    box-shadow: 0px -5px 6px #999, -4px -5px 6px #999, 4px -5px 6px #999;
+}
+
+.tabcontainer{
+  width: 85%;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 0 15px #000;
+  border-radius: 6px;
+  padding-bottom: 20px;
+  background-color: #fff;
+}
+
+.tab{
+  background-color: #fff;
+  width: 100%;
+  height: auto;
+  z-index: -999;
+  position: relative;
+}
+
+.tab >h2.chart{
+  margin: 20px 0 0 0 ;
+}
+
+div.select{
+  z-index: 1;
+}
+
+.tab .chart{
+  position: absolute;
+}
+.tab .rank{
+  display: none;
+}
+
+.tab.select .chart{
+  position: relative;
+}
+
+.tab.select .rank{
+  display: block;
+}
+
+/*
+其他
+*/
+
+.none{
+  display: none;
+}
+
+#diychart{
+  overflow: hidden;
+}
+
+.rank{
+  margin: 40px 0 0 0;
+  clear: both;
+}
+
+@media screen and (max-width: 1024px) {
+  #condition form label {
+      width: 25%;
+  }
+  
+  table{
+    width: 94%;
+  }
+
+}
+
+/*
+載入中動畫
+*/
+@-webkit-keyframes loading {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes loading {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-o-keyframes loading {
+  from {
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -o-transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  border: 3px solid #3a3;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-animation: loading 1s infinite linear;
+  -moz-animation: loading 1s infinite linear;
+  -o-animation: loading 1s infinite linear;
+  animation: loading 1s infinite linear;
+}
