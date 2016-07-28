@@ -1,1 +1,1 @@
-<footer><div>本站資料皆來自中央及各縣市政府公務出國報告資訊網<br>請以官方資料為準</div></footer>
+<footer><div>本站資料皆來自中央及各縣市政府公務出國報告資訊網<br>請以官方資料為準<br><a href="https://github.com/catdingding/report">github</a>、<a href="https://g0v.hackpad.com/E0G6gZDQ2ZZ">g0v hackpad</a></div></footer>

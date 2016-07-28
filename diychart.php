@@ -18,7 +18,7 @@
 			$(document).ready(function () {
 	           $("input").change(function(){
 				if ($('input:radio:checked[name="kind"]').val()!=undefined && $('input:radio:checked[name="search"]').val()!=undefined) {
-					$("#search").attr('disabled', false);
+					$(".send").attr('disabled', false);
 				};
 			}); 
 	            

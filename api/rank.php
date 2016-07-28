@@ -34,7 +34,7 @@ if (in_array($kind, ['year', 'month', 'day', 'office', 'topic_cat', 'gov'])) {
         $sql = "SELECT DATEDIFF(end_date,start_date)+1,count(*) FROM report WHERE DATEDIFF(end_date,start_date)>=0 $condition GROUP BY DATEDIFF(end_date,start_date) ORDER BY DATEDIFF(end_date,start_date) limit $start,25";
     	$sql2    = "SELECT DISTINCT DATEDIFF(end_date,start_date) FROM report WHERE 1=1 $condition ";
     } else {
-        $sql = "SELECT $kind,count(*) FROM report WHERE 1=1 $condition GROUP BY $kind ORDER BY count(*) DESC,$kind limit $start,25";
+        $sql = "SELECT $kind,count(*) FROM report WHERE 1=1 $condition AND $kind!='' GROUP BY $kind ORDER BY count(*) DESC,$kind limit $start,25";
     	$sql2    = "SELECT DISTINCT $kind FROM report WHERE 1=1 $condition ";
     }
 

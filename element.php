@@ -8,7 +8,7 @@
 		?>
         <meta charset="utf-8"/>
         <title>
-            <?php echo $element_value."出國考察概況"; ?>
+            <?php echo $element_value."公務出國概況"; ?>
         </title>
         <base href="/report/" target="_blank"/>
         <link href="bootstrap.min.css" rel="stylesheet"/>
@@ -106,7 +106,7 @@
         <div class="tabcontainer">
             <div class="tab select">
                 <h2 class="chart">
-                    考察年份分布
+                    年份分布
                 </h2>
                 <div class="chart" id="year_chart">
                     <div class="loading">
@@ -117,7 +117,7 @@
             </div>
             <div class="tab">
                 <h2 class="chart">
-                    考察月份分布
+                    月份分布
                 </h2>
                 <div class="chart" id="month_chart">
                     <div class="loading">
@@ -128,7 +128,7 @@
             </div>
             <div class="tab">
                 <h2 class="chart">
-                    考察天數分布
+                    天數分布
                 </h2>
                 <div class="chart" id="day_chart">
                     <div class="loading">
@@ -139,7 +139,7 @@
             </div>
             <div class="tab">
                 <h2 class="chart">
-                    考察單位分布
+                    單位分布
                 </h2>
                 <div class="chart" id="office_chart">
                     <div class="loading">
@@ -150,7 +150,7 @@
             </div>
             <div class="tab">
                 <h2 class="chart">
-                    考察主題分布
+                    主題分布
                 </h2>
                 <div class="chart" id="topic_cat_chart">
                     <div class="loading">
@@ -161,7 +161,7 @@
             </div>
             <div class="tab">
                 <h2 class="chart">
-                    考察政府分布
+                    政府分布
                 </h2>
                 <div class="chart" id="gov_chart">
                     <div class="loading">

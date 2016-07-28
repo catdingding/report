@@ -47,23 +47,26 @@ header+div{
 
 footer{
   width: 100%;
-  height: 65px;
+  height: 100px;
   background-color: #444;
   margin-top: 25px;
-  position: relative;
+  text-align: center;
+}
+
+footer:before {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 footer div{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  display: inline-block;
+  vertical-align: middle;
   text-align: center;
   color: #eee;
   margin: auto;
   line-height: 24px;
-  height: 48px;
 }
 
 /*

@@ -85,7 +85,7 @@ function area()
     echo '"map":{';
     echo '"cols": [';
     echo '{"label":"國家","type":"string"},
-          {"label":"考察次數","type":"number"}';
+          {"label":"前往次數","type":"number"}';
     echo '],';
 
     echo '"rows": [';
@@ -103,7 +103,7 @@ function area()
     echo '"core":{';
     echo '"cols": [';
     echo '{"label":"國家","type":"string"},
-          {"label":"考察次數","type":"number"}';
+          {"label":"前往次數","type":"number"}';
     echo '],';
 
     echo '"rows": [';
@@ -140,7 +140,7 @@ function day()
                 "type"  => "number",
             ],
             [
-                "label" => "考察次數",
+                "label" => "次數",
                 "type"  => "number",
             ],
         ],
@@ -172,7 +172,7 @@ function office()
                 "type"  => "string",
             ],
             [
-                "label" => "考察次數",
+                "label" => "次數",
                 "type"  => "number",
             ],
         ],
@@ -189,7 +189,7 @@ function topic_cat()
     $rows = [];
     global $condition,$db,$result;
 
-    $sql    = "SELECT topic_cat,count(*) FROM report WHERE 1=1 $condition GROUP BY topic_cat ORDER BY count(*) DESC ";
+    $sql    = "SELECT topic_cat,count(*) FROM report WHERE 1=1 $condition AND topic_cat!='' GROUP BY topic_cat ORDER BY count(*) DESC ";
     $result = $db->prepare("$sql");
     bind();
     $result->execute();
@@ -205,7 +205,7 @@ function topic_cat()
                 "type"  => "string",
             ],
             [
-                "label" => "考察次數",
+                "label" => "次數",
                 "type"  => "number",
             ],
         ],
@@ -237,7 +237,7 @@ function year()
                 "type"  => "string",
             ],
             [
-                "label" => "考察次數",
+                "label" => "次數",
                 "type"  => "number",
             ],
         ],
@@ -270,7 +270,7 @@ function month()
                 "type"  => "string",
             ],
             [
-                "label" => "考察次數",
+                "label" => "次數",
                 "type"  => "number",
             ],
         ],
@@ -302,7 +302,7 @@ function gov()
                 "type"  => "string",
             ],
             [
-                "label" => "考察次數",
+                "label" => "次數",
                 "type"  => "number",
             ],
         ],

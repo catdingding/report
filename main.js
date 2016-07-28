@@ -19,13 +19,13 @@ function kind() {
     this.chart_title = arguments[2];
     this.unit = arguments[3];
 }
-var year = new kind('year', '年份', '考察年份分布圖', '年');
-var month = new kind('month', '月份', '考察月份分布圖', '月');
-var day = new kind('day', '天數', '考察天數分布圖(1~50天)', '天');
+var year = new kind('year', '年份', '年份分布圖', '年');
+var month = new kind('month', '月份', '月份分布圖', '月');
+var day = new kind('day', '天數', '天數分布圖(1~50天)', '天');
 var office = new kind('office', '主辦機關', '前50次數主辦機關分布圖', '');
-var topic_cat = new kind('topic_cat', '主題', '考察主題分布圖', '');
+var topic_cat = new kind('topic_cat', '主題', '主題分布圖', '');
 var gov = new kind('gov', '政府', '政府分布圖', '');
-var area = new kind('area', '地區', '前50考察地區分布圖', '');
+var area = new kind('area', '地區', '前50前往地區分布圖', '');
 //一般搜尋區
 $(document).on("click", ".search .page button:nth-of-type(1)", function() {
     page -= 1;
@@ -289,11 +289,19 @@ function chart(kind) {
             table.draw(data, {
                 width: '100%'
             });
+            /*
             google.visualization.events.addListener(table, 'select', function() {
                 chart.setSelection(table.getSelection());
             });
+            */
             google.visualization.events.addListener(chart, 'select', function() {
                 table.setSelection(chart.getSelection());
+            });
+
+            $('#map_table tr').hover(function() {
+                chart.setSelection([{row:$(this).index(),column:null}]);
+            }, function() {
+                chart.setSelection(null);
             });
         };
     });
