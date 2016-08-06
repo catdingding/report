@@ -33,9 +33,9 @@
             });
             
             function drawChart () {
-            	for (var key in kind_list) {
-	            	rank(eval(kind_list[key]));
-	            	chart(eval(kind_list[key]));
+            	for (var value in kind_list) {
+	            	rank(eval(kind_list[value]));
+	            	chart(eval(kind_list[value]));
 	            }
             }
             var kind_list=['year','month','day','office','topic_cat','gov','area'];

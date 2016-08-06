@@ -2,7 +2,7 @@
 require "connect_mysql.php";
 error_reporting(E_ALL ^ E_NOTICE);
 //地區排序函數
-function sort_td($a, $b)
+function sort_area($a, $b)
 {
     if ($a[2] == $b[2]) {
         return 0;
@@ -10,10 +10,10 @@ function sort_td($a, $b)
     return ($a[2] < $b[2]) ? 1 : -1;
 }
 
-$kind     = $_GET['kind'];
+$kind = $_GET['kind'];
 $result;
 
-require("condition.php");
+require "condition.php";
 
 //生成圖表判定
 switch ($kind) {
@@ -45,90 +45,92 @@ switch ($kind) {
 
 function area()
 {
-    global $condition,$db,$result;
-    $print     = [];
-    $area   = [];
-    $sql    = "SELECT DISTINCT area FROM report WHERE 1=1 $condition ";
+    global $condition, $db, $result;
+    $data = [];
+    $rows1=[];
+    $rows2=[];
+
+    $en_area = [];
+    $sql     = "SELECT * FROM area";
+    $result  = $db->query($sql);
+    while ($row = $result->fetch()) {
+        $en_area[$row['name']] = $row['en_name'];
+    }
+
+    $area = [];
+    $i    = 0;
+
+    $sql    = "SELECT area FROM report WHERE 1=1 $condition AND area!='' ";
     $result = $db->prepare("$sql");
     bind();
     $result->execute();
-    while ($row=$result->fetch()) {
-        $area = array_merge($area, explode(",", $row[0]));
+    while ($row = $result->fetch()) {
+        foreach (explode(",", $row[0]) as $value) {
+            $area[$i] = $value;
+            $i++;
+        }
     }
 
-    $area = array_unique($area);
+    $area = array_count_values($area);
 
     $i = 0;
-    $sql    = "SELECT count(*),area.en_name FROM report INNER JOIN area ON area.name=:key WHERE 1=1 $condition AND FIND_IN_SET(:key,area)";
-    $result = $db->prepare("$sql");
-    bind();
-    $result->bindParam(":key", $key);
-    foreach ($area as $key) {
-        if ($key == '') {
-            continue;
-        }
-        $print[$i] = [];
-        //數量
-        $result->execute();
-        while ($row=$result->fetch()) {
-            $print[$i][0] = $row[1];
-            $print[$i][1] = $key;
-            $print[$i][2] = $row[0];
-        }
+    foreach ($area as $key => $value) {
+        $data[$i] = [$en_area[$key], $key, $value];
         $i++;
     }
 
-    //json輸出
-    usort($print, 'sort_td');
+    usort($data, 'sort_area');
 
-    echo '{';
-    echo '"map":{';
-    echo '"cols": [';
-    echo '{"label":"國家","type":"string"},
-          {"label":"前往次數","type":"number"}';
-    echo '],';
-
-    echo '"rows": [';
-    for ($i = 0; $i < count($print); $i++) {
-        echo '{"c":[{"v":"' . $print[$i][0] . '","f":"' . $print[$i][1] . '"},{"v":' . $print[$i][2] . '}]}';
-        if ($i < count($print) - 1) {
-            echo ',';
+    for ($i=0; $i <count($data); $i++) { 
+        $rows1[$i]=["c" => [["v" => $data[$i][0], "f" => $data[$i][1]], ["v" => $data[$i][2]]]];
+        if ($i<50) {
+            $rows2[$i]=["c" => [["v" => $data[$i][1]], ["v" => $data[$i][2]]]];
         }
     }
-    echo ']';
-    echo '},';
 
-    $core = array_slice($print, 0, 50);
+    $json =[
+        "map" =>[
+            "cols" => [
+                [
+                    "label" => "國家",
+                    "type"  => "string",
+                ],
+                [
+                    "label" => "前往次數",
+                    "type"  => "number",
+                ],
+            ],
+            "rows" => $rows1,
+        ],
+        "core" =>[
+            "cols" => [
+                [
+                    "label" => "國家",
+                    "type"  => "string",
+                ],
+                [
+                    "label" => "前往次數",
+                    "type"  => "number",
+                ],
+            ],
+            "rows" => $rows2,
+        ]
+    ];
 
-    echo '"core":{';
-    echo '"cols": [';
-    echo '{"label":"國家","type":"string"},
-          {"label":"前往次數","type":"number"}';
-    echo '],';
-
-    echo '"rows": [';
-    for ($i = 0; $i < count($core); $i++) {
-        echo '{"c":[{"v":"' . $core[$i][1] . '"},{"v":' . $core[$i][2] . '}]}';
-        if ($i < count($core) - 1) {
-            echo ',';
-        }
-    }
-    echo ']';
-    echo '}';
-    echo '}';
+    echo json_encode($json, JSON_UNESCAPED_UNICODE);
 }
 
 function day()
 {
     $i    = 0;
     $rows = [];
-    global $condition,$db,$result;
+    global $condition, $db, $result;
 
     $sql    = "SELECT DATEDIFF(end_date,start_date)+1,count(*) FROM report WHERE DATEDIFF(end_date,start_date)>=0 AND DATEDIFF(end_date,start_date)<=49 $condition GROUP BY DATEDIFF(end_date,start_date)  ORDER BY DATEDIFF(end_date,start_date)";
     $result = $db->prepare("$sql");
     bind();
     $result->execute();
-    while ($row=$result->fetch()) {
+    while ($row = $result->fetch()) {
         $rows[$i] = ["c" => [["v" => "$row[0]", "f" => "$row[0]天"], ["v" => "$row[1]"]]];
         $i++;
     }
@@ -154,13 +156,13 @@ function office()
 {
     $i    = 0;
     $rows = [];
-    global $condition,$db,$result;
+    global $condition, $db, $result;
 
     $sql    = "SELECT office,count(*) FROM report WHERE 1=1 $condition GROUP BY office ORDER BY count(*) DESC limit 0,50";
     $result = $db->prepare("$sql");
     bind();
     $result->execute();
-    while ($row=$result->fetch()) {
+    while ($row = $result->fetch()) {
         $rows[$i] = ["c" => [["v" => "$row[0]"], ["v" => "$row[1]"]]];
         $i++;
     }
@@ -187,13 +189,13 @@ function topic_cat()
 {
     $i    = 0;
     $rows = [];
-    global $condition,$db,$result;
+    global $condition, $db, $result;
 
     $sql    = "SELECT topic_cat,count(*) FROM report WHERE 1=1 $condition AND topic_cat!='' GROUP BY topic_cat ORDER BY count(*) DESC ";
     $result = $db->prepare("$sql");
     bind();
     $result->execute();
-    while ($row=$result->fetch()) {
+    while ($row = $result->fetch()) {
         $rows[$i] = ["c" => [["v" => "$row[0]"], ["v" => "$row[1]"]]];
         $i++;
     }
@@ -219,13 +221,13 @@ function year()
 {
     $i    = 0;
     $rows = [];
-    global $condition,$db,$result;
+    global $condition, $db, $result;
 
     $sql    = "SELECT year(start_date),count(*) FROM report WHERE 1=1 $condition GROUP BY year(start_date) ORDER BY year(start_date)";
     $result = $db->prepare("$sql");
     bind();
     $result->execute();
-    while ($row=$result->fetch()) {
+    while ($row = $result->fetch()) {
         $rows[$i] = ["c" => [["v" => "$row[0]", "f" => "$row[0]年"], ["v" => "$row[1]"]]];
         $i++;
     }
@@ -252,13 +254,13 @@ function month()
 {
     $i    = 0;
     $rows = [];
-    global $condition,$db,$result;
+    global $condition, $db, $result;
 
     $sql    = "SELECT month(start_date),count(*) FROM report WHERE 1=1 $condition GROUP BY month(start_date) ORDER BY month(start_date)";
     $result = $db->prepare("$sql");
     bind();
     $result->execute();
-    while ($row=$result->fetch()) {
+    while ($row = $result->fetch()) {
         $rows[$i] = ["c" => [["v" => "$row[0]", "f" => "$row[0]月"], ["v" => "$row[1]"]]];
         $i++;
     }
@@ -284,13 +286,13 @@ function gov()
 {
     $i    = 0;
     $rows = [];
-    global $condition,$db,$result;
+    global $condition, $db, $result;
 
     $sql    = "SELECT gov,count(*) FROM report WHERE 1=1 $condition GROUP BY gov ORDER BY count(*) DESC ";
     $result = $db->prepare("$sql");
     bind();
     $result->execute();
-    while ($row=$result->fetch()) {
+    while ($row = $result->fetch()) {
         $rows[$i] = ["c" => [["v" => "$row[0]"], ["v" => "$row[1]"]]];
         $i++;
     }

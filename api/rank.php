@@ -53,30 +53,26 @@ if (in_array($kind, ['year', 'month', 'day', 'office', 'topic_cat', 'gov'])) {
 	    $count++;
 	}
 
-} elseif (in_array($kind, ['area'])) {
-    $list   = [];
-    $sql    = "SELECT DISTINCT $kind FROM report WHERE 1=1 $condition ";
+} elseif (in_array($kind, ['area'])) {    
+    $area = [];
+    $i    = 0;
+
+    $sql    = "SELECT area FROM report WHERE 1=1 $condition AND area!='' ";
     $result = $db->prepare("$sql");
     bind();
     $result->execute();
     while ($row = $result->fetch()) {
-        $list = array_merge($list, explode(",", $row[0]));
+        foreach (explode(",", $row[0]) as $value) {
+            $area[$i] = $value;
+            $i++;
+        }
     }
 
-    $list = array_unique($list);
+    $area = array_count_values($area);
 
-    $sql    = "SELECT count(*) FROM report WHERE 1=1 $condition AND FIND_IN_SET(:key,$kind)";
-    $result=$db->prepare("$sql");
-    foreach ($list as $key) {
-        if ($key == '') {
-            continue;
-        }
-        bind();
-        $result->bindParam(":key", $key);
-        $result->execute();
-        while ($row = $result->fetch()) {
-            $data[$i] = ["name" => "$key", "number" => "$row[0]"];
-        }
+    $i=0;
+    foreach ($area as $key => $value) {
+        $data[$i] = ["name" => $key, "number" => $value];
         $i++;
     }
     $count=1;
