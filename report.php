@@ -194,18 +194,30 @@ for ($i = 0; $i< count(explode(",", $row["member_name"])); $i++) {
                     <td>
                         <a class="btn btn-primary" href=
                             <?php
-if ($row["gov"] === "中央政府") {
-    echo "http://report.nat.gov.tw/ReportFront/report_detail.jspx?sysId=" . $row["id"];
-} else {
-    echo $row["link"] . "/OpenFront/report/report_detail.jsp?sysId=" . $row["id"];
-}
-?>
-                            >
+                            if ($row["gov"] === "中央政府") {
+                                echo "http://report.nat.gov.tw/ReportFront/report_detail.jspx?sysId=" . $row["id"];
+                            } else {
+                                echo $row["link"] . "/OpenFront/report/report_detail.jsp?sysId=" . $row["id"];
+                            }
+                            ?>
+                        >
                             按我前往
                         </a>
                     </td>
                 </tr>
             </table>
+            <div id="disqus_thread"></div>
+            <script>
+            $(document).ajaxStop(function () {
+                if (disqus===0) {
+                    var d = document, s = d.createElement('script');
+                    s.src = '//gong-wu-chu-guo-bao-gao-cha-xun-tong-ji-wang.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                    disqus=1;
+                }
+            });
+            </script>
         <?php 
             require "footer.php";
         ?>

@@ -15,14 +15,19 @@
         <script src="main.js"></script>
         <script>
             google.charts.load('current', {packages: ["line","corechart","geochart","table"]});
+            google.charts.setOnLoadCallback(ready);
+            function ready() {
+                googlechart=1;
+            }
+
 			$(document).ready(function () {
-	           $("input").change(function(){
-				if ($('input:radio:checked[name="kind"]').val()!=undefined && $('input:radio:checked[name="search"]').val()!=undefined) {
-					$(".send").attr('disabled', false);
-				};
-			}); 
-	            
+                $("input").change(function(){
+                    if ($('input:radio:checked[name="kind"]').val()!=undefined && $('input:radio:checked[name="search"]').val()!=undefined) {
+                        $(".send").attr('disabled', false);
+                    };
+                });
 	        });
+
             function makechart () {
 	            var kind = eval($('input:radio:checked[name="kind"]').val());
 	            $(".chart").remove();
@@ -31,113 +36,21 @@
 	            	$("#diychart").append('<div class="chart" id="map"><div class="loading"></div></div>');
 	            	$("#diychart").append('<div class="chart" id="map_table"><div class="loading"></div></div>');
 	            };
-	            chart(kind);
 	            $("html,body").animate({
 		            scrollTop: 590
 		        }, 500);
+                chart(kind);
             }
         </script>
-        
     </head>
     <body>
     <?php 
       require "header.php";
     ?>
     <div id="condition">
-        <form class="form-inline">
-            <h3>
-                條件輸入
-            </h3>
-            <label for="gov">
-                政府
-            </label>
-            <select class="form-control" type="text" id="gov"/>     
-            </select>
-            <label for="id">
-                識別碼
-            </label>
-            <input class="form-control" type="text" id="id"/>
-            
-            <label for="plan_name">
-                計畫名稱
-            </label>
-            <input class="form-control" type="text" id="plan_name"/>
-            
-            <label for="report_name">
-                報告名稱
-            </label>
-            <input class="form-control" type="text" id="report_name"/>
-            
-           
-            <label for="office">
-                主辦機關
-            </label>
-            <select class="form-control" type="text" id="office"/>
-            </select>
-            <label for="member_name">
-                人員姓名
-            </label>
-            <select class="form-control" type="text" id="member_name"/>
-            </select>
-            <label for="member_office">
-                人員機關
-            </label>
-            <input class="form-control" type="text" id="member_office"/>
-            
-            <label for="member_unit">
-                人員單位
-            </label>
-            <input class="form-control" type="text" id="member_unit"/>
-            
-            <label for="member_job">
-                人員職稱
-            </label>
-            <input class="form-control" type="text" id="member_job"/>            
-        </form>
-        <form class="form-inline">
-        <h3>條件輸入</h3>
-            <label for="start_date">
-                起始日期
-            </label>
-            <input class="form-control" type="date" id="start_date"/>
-            
-            <label for="end_date">
-                結束日期
-            </label>
-            <input class="form-control" type="date" id="end_date"/>
-            
-            <label for="area">
-                前往地區
-            </label>
-            <select class="form-control" type="text" id="area" placeholder="如：香港、日本"/>
-            </select>
-            
-            <label for="visit">
-                參訪機關
-            </label>
-            <input class="form-control" type="text" id="visit"/>
-            
-            <label for="topic_cat">
-                主題分類
-            </label>
-            <select class="form-control" type="text" id="topic_cat"/>
-            </select>
-            <label for="adm_cat">
-                施政分類
-            </label>
-            <select class="form-control" type="text" id="adm_cat"/>
-            </select>
-            <label for="summary">
-                報告摘要
-            </label>
-            <input class="form-control" type="text" id="summary"/>
-            
-            <label for="keyword">
-                關鍵詞
-            </label>
-            <input class="form-control" type="text" id="keyword"/>
-            
-        </form>
+        <?php 
+          require 'form_condition.php';
+        ?>
         <form class="form-inline">
             <h3>
                 圖表選擇
@@ -192,11 +105,30 @@
         </form>
 
     </div>
+        <div class="sample">
+            <span>推薦搜索：</span>
+            <button class="btn btn-info" onclick="sample('area=中國大陸','search=equal','kind=year')">中國大陸：年份分布</button>
+            <button class="btn btn-info" onclick="sample('topic_cat=公共工程','kind=area','search=equal')">公共工程：地區分布</button>
+            <button class="btn btn-info" onclick="sample('office=高級中學','kind=office','search=similar')">高級中學：主辦機關分布</button>
+            <button class="btn btn-info" onclick="sample('gov=苗栗縣','kind=year','search=equal')">苗栗縣：年份分布</button>
+        </div>
         
         <button class="send btn btn-success" onclick="makechart();" disabled="disable">
             生成圖表
         </button>
         <div id="diychart"></div>
+        <div id="disqus_thread"></div>
+            <script>
+            $(document).ajaxStop(function () {
+                if (disqus===0) {
+                    var d = document, s = d.createElement('script');
+                    s.src = '//gong-wu-chu-guo-bao-gao-cha-xun-tong-ji-wang.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                    disqus=1;
+                }
+            });
+            </script>
         <?php 
             require "footer.php";
         ?>

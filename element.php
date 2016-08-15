@@ -33,9 +33,9 @@
             });
             
             function drawChart () {
-            	for (var value in kind_list) {
-	            	rank(eval(kind_list[value]));
-	            	chart(eval(kind_list[value]));
+            	for (var key in kind_list) {
+	            	rank(eval(kind_list[key]));
+	            	chart(eval(kind_list[key]));
 	            }
             }
             var kind_list=['year','month','day','office','topic_cat','gov','area'];
@@ -190,6 +190,18 @@
                 </div>
             </div>
         </div>
+        <div id="disqus_thread"></div>
+            <script>
+            $(document).ajaxStop(function () {
+                if (disqus===0) {
+                    var d = document, s = d.createElement('script');
+                    s.src = '//gong-wu-chu-guo-bao-gao-cha-xun-tong-ji-wang.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                    disqus=1;
+                }
+            });
+            </script>
         <?php 
     		require "footer.php";
     	?>

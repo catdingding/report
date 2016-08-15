@@ -72,6 +72,9 @@ if (in_array($kind, ['year', 'month', 'day', 'office', 'topic_cat', 'gov'])) {
 
     $i=0;
     foreach ($area as $key => $value) {
+        if (!$key) {
+            continue;
+        }
         $data[$i] = ["name" => $key, "number" => $value];
         $i++;
     }

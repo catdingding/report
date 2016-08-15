@@ -75,6 +75,9 @@ function area()
 
     $i = 0;
     foreach ($area as $key => $value) {
+        if (!$key) {
+            continue;
+        }
         $data[$i] = [$en_area[$key], $key, $value];
         $i++;
     }

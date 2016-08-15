@@ -14,7 +14,7 @@ if ($search!="") {
 
 switch ($type) {
 	case 'area':
-		$sql="SELECT name FROM area WHERE name LIKE '%$search%' ORDER BY number DESC limit 0,5";
+		$sql="SELECT name FROM area WHERE name LIKE '%$search%' limit 0,5";
 		break;
 	case 'office':
 		$sql="SELECT office FROM report WHERE office LIKE '%$search%' GROUP BY office ORDER BY count(*) DESC limit 0,5";

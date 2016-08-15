@@ -1,203 +1,159 @@
-<?php 
-    $gov           = htmlentities($_GET['gov'], ENT_QUOTES);
-    $office        = htmlentities($_GET['office'], ENT_QUOTES);
-    $area          = htmlentities($_GET['area'], ENT_QUOTES);
-    $topic_cat     = htmlentities($_GET['topic_cat'], ENT_QUOTES);
-    $down          = htmlentities($_GET['down'], ENT_QUOTES);
-    function option($value){
-        global $$value;
-        return $$value ?"<option selected value='".$$value."'>".$$value."</option>":"";
-    }
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
     <head>
-        <meta charset="UTF-8"/>
+        <meta charset="utf-8"/>
         <title>
             公務出國報告查詢統計網
         </title>
-        <link rel="stylesheet" href="bootstrap.min.css"/>
-        <link rel="stylesheet" href="style.css"/>
-        <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.full.min.js"></script>
-        <script src="select.js"></script>
-        <script src="main.js"></script>
-        <script>
-        var first=<?php echo $down ? 1 : 0 ; ?>;
-        var page = 1;
-        var max_page;
-        $(document).ready(function() {
-            list();    
-        });
-        function send() {
-            page=1;
-            list();
-        }
+        <base href="/report/" target="_blank"/>
+        <link href="bootstrap.min.css" rel="stylesheet"/>
+        <link href="style.css" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
         </script>
     </head>
     <body>
-        <?php require "header.php"; ?>
-        <div id="condition">
-            <form class="form-inline">
-                <h3>
-                    條件輸入
-                </h3>
-                <label for="gov">
-                    政府
-                </label>
-                <select class="form-control" type="text" id="gov" placeholder="如：中央政府、臺中市"/>
-                <?php echo option('gov'); ?></select>
-                <label for="id">
-                    識別碼
-                </label>
-                <input class="form-control" type="text" id="id"/>
-                
-                <label for="plan_name">
-                    計畫名稱
-                </label>
-                <input class="form-control" type="text" id="plan_name"/>
-                
-                <label for="report_name">
-                    報告名稱
-                </label>
-                <input class="form-control" type="text" id="report_name"/>
-                
-                <label for="office">
-                    主辦機關
-                </label>
-                <select class="form-control" type="text" id="office"/>
-                <?php echo option('office'); ?></select>
-                <label for="member_name">
-                    人員姓名
-                </label>
-                <select class="form-control" type="text" id="member_name"/>
-                </select>
-                <label for="member_office">
-                    人員機關
-                </label>
-                <input class="form-control" type="text" id="member_office"/>
-                
-                <label for="member_unit">
-                    人員單位
-                </label>
-                <input class="form-control" type="text" id="member_unit"/>
-                
-                <label for="member_job">
-                    人員職稱
-                </label>
-                <input class="form-control" type="text" id="member_job"/>                
-            </form>
-            <form class="form-inline">
-                <h3>
-                    條件輸入
-                </h3>
-                <label for="start_date">
-                    起始日期
-                </label>
-                <input class="form-control" type="date" id="start_date"/>
-                
-                <label for="end_date">
-                    結束日期
-                </label>
-                <input class="form-control" type="date" id="end_date"/>
-                
-                <label for="area">
-                    前往地區
-                </label>
-                <select class="form-control" type="text" id="area" placeholder="如：香港、日本"/>
-                <?php echo option('area'); ?></select>
-                <label for="visit">
-                    參訪機關
-                </label>
-                <input class="form-control" type="text" id="visit"/>
-                
-                <label for="topic_cat">
-                    主題分類
-                </label>
-                <select class="form-control" type="text" id="topic_cat"/>
-                <?php echo option('topic_cat'); ?></select>
-                <label for="adm_cat">
-                    施政分類
-                </label>
-                <select class="form-control" type="text" id="adm_cat"/>
-                </select>
-                <label for="summary">
-                    報告摘要
-                </label>
-                <input class="form-control" type="text" id="summary"/>
-                
-                <label for="keyword">
-                    關鍵詞
-                </label>
-                <input class="form-control" type="text" id="keyword"/>                
-            </form>
-            <form class="form-inline">
-                <h3>
-                    搜尋要求
-                </h3>
-                <input class="form-control" type="radio" id="equal" name="search" checked="checked" value="equal"/>
-                <label for="equal">
-                    完全符合
-                </label>
-                
-                <input class="form-control" type="radio" id="similar" name="search" value="similar"/>
-                <label for="similar">
-                    部分符合
-                </label>
-            </form>
-        </div>
-        <button class="send btn btn-success" onclick="send();">
-            查詢
-        </button>
-        <div class="search">
-        <div class="page">
-            <button class="btn btn-info">
-                上一頁
-            </button>
-            <span></span>
-            <button class="btn btn-info">
-                下一頁
-            </button>
-        </div>
-        <table id="list">
-            <thead>
-                <tr>
-                    <th>
-                        識別碼
-                    </th>
-                    <th>
-                        報告名稱
-                    </th>
-                    <th>
-                        人員
-                    </th>
-                    <th>
-                        出國期間
-                    </th>
-                    <th>
-                        主辦機關
-                    </th>
-                    <th>
-                        前往地區
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        <div class="page">
-            <button class="btn btn-info">
-                上一頁
-            </button>
-            <span></span>
-            <button class="btn btn-info">
-                下一頁
-            </button>
-        </div>
-        </div>
         <?php
-            require "footer.php";
-        ?>
+    		require "header.php";
+    	?>
+        <article>
+            <h2>
+                專案簡介
+            </h2>
+            <p>
+                政府的公務出國考察經常被認為是在消化預算[注1]或是出國旅遊[注2]，在資源分配上也備受質疑[注3]。本計畫希望能夠整合各公務出國資訊網的資料，使公務出國的狀況能以
+                <a href="http://catding.twbbs.org/report/statistics.php">
+                    更直觀方式呈現
+                </a>
+                ，也提供
+                <a href="http://catding.twbbs.org/report/search.php">
+                    更方便的管道
+                </a>
+                查詢報告。
+                <br/>
+                <br/>
+                [注1]：到2015年底為止的統計，10~12月的出國次數即佔了超過33%，而1~3月僅佔11%多。
+                <br/>
+                [注2]：如各種"傑出人員出國觀摩"。
+                <br/>
+                [注3]：地方政府的公務出國，第一名台北市的次數及超過第二至五名的加總(高雄、台中、新北、屏東)。
+                <br/>
+                注意：以上統計均不含金門縣及新竹市(金門縣無相關網站、新竹市開放的欄位過少)
+                <br/>
+            </p>
+        </article>
+        <article id="site">
+            <h2>
+                本站內容
+            </h2>
+            <div>
+                <div>
+                	<h3>報告查詢</h3>
+                    <p>
+                        自行設定各式條件，檢索中央與地方政府的出國資料及報告。
+                    </p>
+                    <p>
+                        注意同名同姓者！
+                    </p>
+                </div>
+                <div>
+                	<h3>圖表生成</h3>
+                    <p>
+                        想知道哪一年開始大量前往中國?
+                    </p>
+                    <p>
+                        想知道公共工程都前往哪裡考察?
+                    </p>
+                    <p>
+                        按我就對了！
+                    </p>
+                </div>
+                <div>
+                	<h3>統計資料</h3>
+                    <p>
+                        以圖表和列表，呈現所有資料的年分、月份、地區、主辦機關.......的分布，讓你一目瞭然。
+                    </p>
+                </div>
+                <div>
+                	<h3>物件頁面</h3>
+                    <p>
+                        有發現單位、地區、年分、主題、政府都能點下去嗎?
+                    </p>
+                    <p>
+                        各物件的頁面會清楚呈現出國狀況，有如專屬的統計資料頁面喔。
+                    </p>
+                </div>
+            </div>
+            <div>
+                <a class="btn btn-success" href="search.php">
+                    報告查詢
+                </a>
+                <a class="btn btn-success" href="diychart.php">
+                    圖表生成
+                </a>
+                <a class="btn btn-success" href="statistics.php">
+                    統計資料
+                </a>
+                <a class="btn btn-success" href="element/office/%E8%8B%97%E6%A0%97%E7%B8%A3%E6%94%BF%E5%BA%9C">
+                    查看範例
+                </a>
+            </div>
+        </article>
+        <article>
+            <h2>
+                統計成果
+            </h2>
+            <ul>
+                <li>
+                    一到四季公務出國次數的比例分別約為：11%、24%、31%、33%
+                </li>
+                <li>
+                    最常前往的地區：美國、中國大陸、日本
+                </li>
+                <li>
+                    公務出國次數的逐年變化：到2013年基本上皆逐年上漲，但2014、2015皆略為降低
+                </li>
+                <li>
+                    政府分布：中央佔75%、台北市佔8%、高雄市佔3.4%、台中市佔1.8%
+                </li>
+                <li>
+                    主題分布：前三名為教育文化(<span data-tooltip="教育文化和教育都是同層級的分類，原因不明">含教育</span>)、財政經濟、公共工程
+                </li>
+                <li>	
+					以上統計均不含金門縣及新竹市
+                </li>
+            </ul>
+        </article>
+        <article>
+            <h2>
+                參與專案
+            </h2>
+            <p>
+                無論您是UX/UI設計師、前/後端工程師、有公務出國考察經驗者，或是任何有想法、有興趣的人，都歡迎加入本專案。
+                <br/>
+                <br/>
+                g0v hackpad：
+                <a href="https://g0v.hackpad.com/E0G6gZDQ2ZZ">
+                    https://g0v.hackpad.com/E0G6gZDQ2ZZ
+                </a>
+                <br/>
+                facebook 社團：
+                <a href="https://www.facebook.com/groups/1125748634116081/">
+                    https://www.facebook.com/groups/1125748634116081/
+                </a>
+            </p>
+        </article>
+        <div id="disqus_thread">
+        </div>
+        <script>
+            (function () {
+                var d = document, s = d.createElement('script');
+                s.src = '//gong-wu-chu-guo-bao-gao-cha-xun-tong-ji-wang.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <?php 
+    		require "footer.php";
+    	?>
     </body>
 </html>
