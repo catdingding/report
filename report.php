@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
     <head>
         <meta charset="UTF-8"/>
         <?php
@@ -208,15 +208,12 @@ for ($i = 0; $i< count(explode(",", $row["member_name"])); $i++) {
             </table>
             <div id="disqus_thread"></div>
             <script>
-            $(document).ajaxStop(function () {
-                if (disqus===0) {
-                    var d = document, s = d.createElement('script');
-                    s.src = '//gong-wu-chu-guo-bao-gao-cha-xun-tong-ji-wang.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                    disqus=1;
-                }
-            });
+            (function () {
+                var d = document, s = d.createElement('script');
+                s.src = '//gong-wu-chu-guo-bao-gao-cha-xun-tong-ji-wang.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
             </script>
         <?php 
             require "footer.php";

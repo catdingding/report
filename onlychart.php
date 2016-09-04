@@ -7,11 +7,22 @@
         </title>
         <link rel="stylesheet" href="bootstrap.min.css"/>
         <link rel="stylesheet" href="style.css">
-        <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+        <style>
+            header, header+div, #condition, .sample, .send, #disqus_thread, footer, #area_chart, #map_table {
+                display: none;
+            }
+
+            div.chart {
+                background-color: #fff;
+                max-height: 100vh !important;
+                margin-top: 0px !important;
+                width: 100% !important;
+                margin: 0 !important;
+            }
+        </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="main.js"></script>
         <script src="https://www.gstatic.com/charts/loader.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.full.min.js"></script>
         <script src="select.js"></script>
         <script>
             if (filename==='onlychart.php' || filename==='imgchart.php') {
@@ -53,9 +64,6 @@
         </script>
     </head>
     <body>
-    <?php 
-      require "header.php";
-    ?>
     <div id="condition">
         <?php 
           require 'form_condition.php';
@@ -114,32 +122,6 @@
         </form>
 
     </div>
-        <div class="sample">
-            <span>推薦搜索：</span>
-            <button class="btn btn-info" onclick="sample('area=中國大陸','search=equal','kind=year')">中國大陸：年份分布</button>
-            <button class="btn btn-info" onclick="sample('topic_cat=公共工程','kind=area','search=equal')">公共工程：地區分布</button>
-            <button class="btn btn-info" onclick="sample('office=高級中學','kind=office','search=similar')">高級中學：主辦機關分布</button>
-            <button class="btn btn-info" onclick="sample('gov=苗栗縣','kind=year','search=equal')">苗栗縣：年份分布</button>
-        </div>
-        
-        <button class="send btn btn-success" onclick="makechart();" disabled="disable">
-            生成圖表
-        </button>
         <div id="diychart"></div>
-        <div id="disqus_thread"></div>
-            <script>
-            $(document).ajaxStop(function () {
-                if (disqus===0) {
-                    var d = document, s = d.createElement('script');
-                    s.src = '//gong-wu-chu-guo-bao-gao-cha-xun-tong-ji-wang.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                    disqus=1;
-                }
-            });
-            </script>
-        <?php 
-            require "footer.php";
-        ?>
     </body>
 </html>

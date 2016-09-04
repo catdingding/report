@@ -7,10 +7,6 @@
     </label>
     <select class="form-control" type="text" id="gov"/>
     </select>
-    <label for="id" data-tooltip="報告的獨立ID">
-        識別碼
-    </label>
-    <input class="form-control" type="text" id="id"/>
     <label for="plan_name">
         計畫名稱
     </label>
@@ -29,14 +25,6 @@
     </label>
     <select class="form-control" type="text" id="member_name"/>
     </select>
-    <label for="member_office">
-        人員機關
-    </label>
-    <input class="form-control" type="text" id="member_office"/>
-    <label for="member_unit">
-        人員單位
-    </label>
-    <input class="form-control" type="text" id="member_unit"/>
     <label for="member_job">
         人員職稱
     </label>
@@ -59,10 +47,6 @@
     </label>
     <select class="form-control" type="text" id="area"/>
     </select>
-    <label for="visit" data-tooltip="前往的地點、機關、公司.......等等">
-        參訪機關
-    </label>
-    <input class="form-control" type="text" id="visit"/>
     <label for="topic_cat" data-tooltip="範圍較大的分類，例如：教育、財政經濟">
         主題分類
     </label>
@@ -73,12 +57,4 @@
     </label>
     <select class="form-control" type="text" id="adm_cat"/>
     </select>
-    <label for="summary" data-tooltip="報告內文的摘錄，若填寫請選擇部分符合模式">
-        報告摘要
-    </label>
-    <input class="form-control" type="text" id="summary"/>
-    <label for="keyword">
-        關鍵詞
-    </label>
-    <input class="form-control" type="text" id="keyword"/>
 </form>

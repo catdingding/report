@@ -70,7 +70,7 @@
 	            }
             });
             
-            google.charts.load('current', {packages: ["line","corechart","geochart","table"]});
+            google.charts.load('current', {packages: ["corechart","geochart","table"]});
 		    google.charts.setOnLoadCallback(drawChart);
         </script>
     </head>

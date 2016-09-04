@@ -2,14 +2,13 @@
 <html lang="zh-Hant-TW">
     <head>
         <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
         <title>
             公務出國報告查詢統計網
         </title>
         <base href="/report/" target="_blank"/>
         <link href="bootstrap.min.css" rel="stylesheet"/>
-        <link href="style.css" rel="stylesheet"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
-        </script>
+        <link href="test.css" rel="stylesheet"/>
     </head>
     <body>
         <?php
@@ -54,6 +53,9 @@
                     <p>
                         注意同名同姓者！
                     </p>
+                    <a class="btn btn-success" href="search.php">
+                        報告查詢
+                    </a>
                 </div>
                 <div>
                 	<h3>圖表生成</h3>
@@ -66,12 +68,18 @@
                     <p>
                         按我就對了！
                     </p>
+                    <a class="btn btn-success" href="diychart.php">
+                        圖表生成
+                    </a>
                 </div>
                 <div>
                 	<h3>統計資料</h3>
                     <p>
                         以圖表和列表，呈現所有資料的年分、月份、地區、主辦機關.......的分布，讓你一目瞭然。
                     </p>
+                    <a class="btn btn-success" href="statistics.php">
+                        統計資料
+                    </a>
                 </div>
                 <div>
                 	<h3>物件頁面</h3>
@@ -81,21 +89,10 @@
                     <p>
                         各物件的頁面會清楚呈現出國狀況，有如專屬的統計資料頁面喔。
                     </p>
+                    <a class="btn btn-success" href="element/office/%E8%8B%97%E6%A0%97%E7%B8%A3%E6%94%BF%E5%BA%9C">
+                        查看範例
+                    </a>
                 </div>
-            </div>
-            <div>
-                <a class="btn btn-success" href="search.php">
-                    報告查詢
-                </a>
-                <a class="btn btn-success" href="diychart.php">
-                    圖表生成
-                </a>
-                <a class="btn btn-success" href="statistics.php">
-                    統計資料
-                </a>
-                <a class="btn btn-success" href="element/office/%E8%8B%97%E6%A0%97%E7%B8%A3%E6%94%BF%E5%BA%9C">
-                    查看範例
-                </a>
             </div>
         </article>
         <article>

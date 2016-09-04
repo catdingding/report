@@ -1,5 +1,6 @@
 var disqus=0;
 var googlechart=0;
+var filename=location.pathname.split('/').pop();
 
 //常用函數
 function array_remove(array,value) {
@@ -65,6 +66,9 @@ function urlchange() {
 
 //帶參數的連結(條件輸入區)
 $(document).ready(function() {
+    if (filename!=='search.php' && filename!=='diychart.php' && filename!=='onlychart.php') {
+        return;
+    }
     var search=decodeURI(location.search).replace('?','').split('&');
     if (search.toString()==='') {
         return;
@@ -73,11 +77,6 @@ $(document).ready(function() {
 });
 
 function auto_search(list) {
-    var filename=location.pathname.split('/').pop();
-    if (filename!=='search.php' && filename!=='diychart.php') {
-        return;
-    }
-
     for (var key in list) {
         var input=list[key].split('=');
         condition_set(input[0],input[1]);
@@ -85,7 +84,7 @@ function auto_search(list) {
 
     if (filename==='search.php') {
         report();
-    }else if (filename==='diychart.php') {
+    }else if (filename==='diychart.php' || filename==='onlychart.php') {
         waitchart();
     }
 
@@ -155,7 +154,7 @@ $(document).on("click", ".search .page span button", function() {
 
 function report() {
     $("html,body").animate({
-            scrollTop: 560
+            scrollTop: 440
     }, 500);
     $.getJSON("api/search.php", {
         gov: $("#gov").val(),
@@ -406,7 +405,7 @@ function chart(kind) {
                 },
                 colorAxis: {
                     minValue: 0,
-                    colors: ['#F6F2ED', '#1A6F1F']
+                    colors: ['#FCFAF2', '#42602D']
                 }
             };
             var chart = new google.visualization.GeoChart(document.getElementById('map'));

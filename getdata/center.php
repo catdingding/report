@@ -4,6 +4,9 @@ error_reporting(E_ALL);
 require "simple_html_dom.php";
 require "connect_mysql.php";
 
+//$grab_type = 'all';
+$grab_type='new';
+
 $column = ["gov", "id", "plan_name", "report_name", "main_file", "other_file", "report_date", "report_page", "office", "member_name", "member_office", "member_unit", "member_job", "member_level", "member_num", "start_date", "end_date", "area", "visit", "type", "keyword", "note", "topic_cat", "adm_cat", "summary"];
 $gov    = '中央政府';
 
@@ -17,17 +20,17 @@ curl_setopt($ch, CURLOPT_COOKIEJAR, "cookie.txt");
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array("action" => "search", "sort" => "4", "searchType" => "quick")));
 curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
 curl_exec($ch);
-/*
-//查詢過的頁碼
-$sql = "SELECT * FROM info WHERE type='center'";
-$result = $db->query($sql);
-while ($row = $result->fetch()) {
-$page_num = $row[0];
-}
- */
 
-//$page_num++;
-$page_num = 1;
+if ($grab_type == 'all') {
+    $sql = "SELECT * FROM info WHERE type='center'";
+    $result = $db->query($sql);
+    while ($row = $result->fetch()) {
+        $page_num = $row[0];
+        $page_num++;
+    }
+} elseif ($grab_type == 'new') {
+    $page_num = 1;
+}
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "http://report.nat.gov.tw/ReportFront/rpt_search.jspx?orgType=1");
@@ -54,7 +57,15 @@ $list = $html->find(".altrow");
 foreach ($list as $tr) {
     $id = str_replace("report_detail.jspx?sysId=", "", $tr->find("td", 2)->find("a", 0)->href);
 
-    $html = file_get_html("http://report.nat.gov.tw/ReportFront/report_detail.jspx?sysId=" . $id);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://report.nat.gov.tw/ReportFront/report_detail.jspx?sysId=" . $id);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
+    $curl_scraped_page = curl_exec($ch);
+    //取得頁面網址
+    $html = new simple_html_dom();
+    $html->load($curl_scraped_page, true, false);
+    
     if (preg_match("/sysid/", $html->find("p", 0)->plaintext)) {
         continue;
     }
@@ -146,12 +157,12 @@ foreach ($list as $tr) {
     //更新報告資料
     $result->execute();
 }
-/*
+
 //都查過就從頭開始
 if ($page_num >= $maxpage) {
-$page_num = 0;
+    $page_num = 0;
 }
- */
+
 
 //更新已查詢頁數
 $sql = "UPDATE info SET page_num='$page_num',maxpage='$maxpage' WHERE type='center' ";

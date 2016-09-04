@@ -66,14 +66,13 @@ header {
 
 header h1 {
     margin: 0;
-    text-align: left;
     display: block;
     float: left;
     width: 500px;
     line-height: 55px;
     font-size: 35px;
     font-weight: 700;
-    padding-left: 100px;
+    margin-left: 100px;
 }
 
 header h1 a {
@@ -91,9 +90,35 @@ header > a {
     margin-left: 15px;
 }
 
+header iframe{
+    margin-top: 17px;
+    margin-left: 50px;
+}
+
 header+div {
     height: 56px;
     margin-bottom: 5px;
+}
+
+@media screen and (max-width:768px) { 
+    header{
+        position: static;
+        height: 112px;
+    }
+    header h1{
+        margin: 0 auto;
+        width: 100%;
+        font-size: 28px;
+    }
+    header > a:first-of-type{
+        margin-left: 8%;
+    }
+    header + div{
+        display: none;
+    }
+    header iframe{
+        margin-left: 25px;
+    }
 }
 
 footer {
@@ -158,28 +183,45 @@ article h3{
     font-size:18px;
 }
 
-article#site > div:nth-of-type(1) {
+article#site > div{
     overflow: hidden;
     margin: 10px 4% 10px 4%;
+    display: flex;
 }
 
-article#site > div:nth-of-type(1) div {
+article#site > div  div {
     height: auto;
     float: left;
     width: 25%;
-    padding: 0 15px 0 15px;
+    padding: 0 15px 40px 15px;
+    margin-bottom: 20px;
+    position: relative;
 }
 
-article#site > div:nth-of-type(2) {
-    height: auto;
-    overflow:hidden;
-    margin: 15px 4% 20px 4%;
+article#site > div  div a{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
 }
 
-article#site > div:nth-of-type(2) a {
-    float: left;
-    width: 13%;
-    margin: 0 6% 0 6%;
+@media screen and (max-width:768px) { 
+    article{
+        width: 90% !important;
+    }
+    article#site >div{
+        flex-wrap: wrap;
+    }
+    article#site > div  div {
+        width: 50%;
+    }
+    article ul{
+        padding:0 15px 0 50px;
+    }
+    article#site > div  div {
+        padding: 0 5px 40px 5px;
+    }
 }
 
 
@@ -537,6 +579,7 @@ tab相關
     position: relative;
     display: block;
     width: 100px;
+    max-width: 10%;
     height: 100%;
     margin-left: 3%;
     line-height: 36px;
@@ -544,7 +587,7 @@ tab相關
     font-size: 16px;
     text-align: center;
     cursor: pointer;
-    background-color: #4169E1;
+    background-color: #51A8DD;
     margin-top: 1px;
     border-radius: 5px 5px 0 0;
     box-shadow: 0 -12px 10px -10px #333 inset;
