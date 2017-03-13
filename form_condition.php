@@ -1,4 +1,5 @@
 <form class="form-inline">
+    <div class="hamburger"></div>
     <h3>
     條件輸入
     </h3>
@@ -31,6 +32,7 @@
     <input class="form-control" type="text" id="member_job"/>
 </form>
 <form class="form-inline">
+    <div class="hamburger"></div>
     <h3>
     條件輸入
     </h3>

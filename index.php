@@ -2,13 +2,13 @@
 <html lang="zh-Hant-TW">
     <head>
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
             公務出國報告查詢統計網
         </title>
         <base href="/report/" target="_blank"/>
         <link href="bootstrap.min.css" rel="stylesheet"/>
-        <link href="test.css" rel="stylesheet"/>
+        <link href="style.css" rel="stylesheet"/>
     </head>
     <body>
         <?php
@@ -36,7 +36,7 @@
                 <br/>
                 [注3]：地方政府的公務出國，第一名台北市的次數及超過第二至五名的加總(高雄、台中、新北、屏東)。
                 <br/>
-                注意：以上統計均不含金門縣及新竹市(金門縣無相關網站、新竹市開放的欄位過少)
+                注意：以上統計均不含新竹市(新竹市開放的欄位過少)
                 <br/>
             </p>
         </article>
@@ -60,10 +60,10 @@
                 <div>
                 	<h3>圖表生成</h3>
                     <p>
-                        想知道哪一年開始大量前往中國?
+                        想知道哪一年開始大量前往中國？
                     </p>
                     <p>
-                        想知道公共工程都前往哪裡考察?
+                        想知道公共工程都前往哪裡考察？
                     </p>
                     <p>
                         按我就對了！
@@ -84,7 +84,7 @@
                 <div>
                 	<h3>物件頁面</h3>
                     <p>
-                        有發現單位、地區、年分、主題、政府都能點下去嗎?
+                        有發現單位、地區、年分、主題、政府都能點下去嗎？
                     </p>
                     <p>
                         各物件的頁面會清楚呈現出國狀況，有如專屬的統計資料頁面喔。
@@ -116,7 +116,7 @@
                     主題分布：前三名為教育文化(<span data-tooltip="教育文化和教育都是同層級的分類，原因不明">含教育</span>)、財政經濟、公共工程
                 </li>
                 <li>	
-					以上統計均不含金門縣及新竹市
+					以上統計均不含新竹市
                 </li>
             </ul>
         </article>

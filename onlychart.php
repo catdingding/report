@@ -59,6 +59,7 @@
 	            $("html,body").animate({
 		            scrollTop: 600
 		        }, 500);
+                condition.obj={};
                 chart(kind);
             }
         </script>

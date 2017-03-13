@@ -2,6 +2,7 @@
 <html lang="zh-Hant-TW">
     <head>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
             圖表產生器
         </title>
@@ -46,8 +47,9 @@
 	            	$("#diychart").append('<div class="chart" id="map_table"><div class="loading"></div></div>');
 	            };
 	            $("html,body").animate({
-		            scrollTop: 600
+		            scrollTop: $('#diychart').offset().top
 		        }, 500);
+                condition.obj={};
                 chart(kind);
             }
         </script>
@@ -60,7 +62,8 @@
         <?php 
           require 'form_condition.php';
         ?>
-        <form class="form-inline">
+        <form class="form-inline open">
+            <div class="hamburger"></div>
             <h3>
                 圖表選擇
             </h3>

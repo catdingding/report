@@ -1,58 +1,69 @@
 /*
 disqus
 */
+
 #disqus_thread {
     width: 85%;
     margin: 0 auto;
     margin-top: 30px;
 }
 
+
 /*tooltip*/
-[data-tooltip]{
-  border-bottom: 1px dotted #690;
+
+[data-tooltip] {
+    border-bottom: 1px dotted #690;
 }
+
 [data-tooltip]:hover {
-  position: relative;
-  cursor: help;
-}
-[data-tooltip]:hover:after{
-  display: block;
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  margin-left:-100px;
-  word-break: break-all;
-  width: 200px;
-  content:attr(data-tooltip);
-  background: #222;
-  opacity: 0.8;
-  color: #fff;
-  padding: 0 8px 0 8px;
-  border-radius: 5px;
-  text-align:center;
-  line-height:35px;
-}
-[data-tooltip]:after{
-  display: none;
+    position: relative;
+    cursor: help;
 }
 
-label[data-tooltip]:hover:after{
-    left:100%;
-    bottom:0%;
-    margin-left:0;
-    z-index:999;
-    font-weight:400;
-    white-space:nowrap;
-    width:auto;
+[data-tooltip]:hover:after {
+    display: block;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -100px;
+    word-break: break-all;
+    width: 200px;
+    content: attr(data-tooltip);
+    background: #222;
+    opacity: 0.8;
+    color: #fff;
+    padding: 0 8px 0 8px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 35px;
 }
 
-label[data-tooltip]{
-    margin-top:5px;
+[data-tooltip]:after {
+    display: none;
 }
+
+label[data-tooltip]:hover:after {
+    left: 100%;
+    bottom: 0%;
+    margin-left: 0;
+    z-index: 999;
+    font-weight: 400;
+    white-space: nowrap;
+    width: auto;
+}
+
+label[data-tooltip] {
+    margin-top: 5px;
+}
+
 
 /*
 首頁頁尾
 */
+
+a{
+	word-break: break-all;
+}
 
 header {
     position: fixed;
@@ -68,11 +79,11 @@ header h1 {
     margin: 0;
     display: block;
     float: left;
-    width: 500px;
+    width: auto;
     line-height: 55px;
     font-size: 35px;
     font-weight: 700;
-    margin-left: 100px;
+    margin: 0 4% 0 10%;
 }
 
 header h1 a {
@@ -90,9 +101,9 @@ header > a {
     margin-left: 15px;
 }
 
-header iframe{
+header iframe {
     margin-top: 17px;
-    margin-left: 50px;
+    margin-left: 4.5%;
 }
 
 header+div {
@@ -100,24 +111,33 @@ header+div {
     margin-bottom: 5px;
 }
 
-@media screen and (max-width:768px) { 
-    header{
+@media screen and (max-width:825px) {
+    header {
         position: static;
         height: 112px;
     }
-    header h1{
+    header h1 {
         margin: 0 auto;
         width: 100%;
         font-size: 28px;
     }
-    header > a:first-of-type{
-        margin-left: 8%;
-    }
-    header + div{
+    header + div {
         display: none;
     }
-    header iframe{
-        margin-left: 25px;
+    header iframe {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (max-width:425px) {
+    header {
+        position: static;
+        height: 112px;
+        margin-bottom: 30px;
+    }
+    header > a{
+        width: 30%;
+        margin-left: 2.5%;
     }
 }
 
@@ -159,17 +179,17 @@ article {
     overflow: hidden;
 }
 
-article#site{
+article#site {
     width: 80%;
 }
 
-article p{
+article p {
     font-size: 16px;
     line-height: 30px;
     text-indent: 2em;
 }
 
-article > p {
+article p {
     padding: 15px;
 }
 
@@ -179,17 +199,17 @@ article ul {
     line-height: 30px;
 }
 
-article h3{
-    font-size:18px;
+article h3 {
+    font-size: 18px;
 }
 
-article#site > div{
+article#site > div {
     overflow: hidden;
     margin: 10px 4% 10px 4%;
     display: flex;
 }
 
-article#site > div  div {
+article#site > div div {
     height: auto;
     float: left;
     width: 25%;
@@ -198,7 +218,7 @@ article#site > div  div {
     position: relative;
 }
 
-article#site > div  div a{
+article#site > div div a {
     display: block;
     position: absolute;
     bottom: 0;
@@ -206,21 +226,31 @@ article#site > div  div a{
     width: 50%;
 }
 
-@media screen and (max-width:768px) { 
-    article{
+article#site > div div p {
+    padding: 0px 15px 0px 15px;
+}
+
+@media screen and (max-width:768px) {
+    article {
         width: 90% !important;
     }
-    article#site >div{
+    article#site >div {
         flex-wrap: wrap;
     }
-    article#site > div  div {
+    article#site > div div {
         width: 50%;
     }
-    article ul{
-        padding:0 15px 0 50px;
+    article ul {
+        padding: 0 15px 0 50px;
     }
-    article#site > div  div {
+    article#site > div div {
         padding: 0 5px 40px 5px;
+    }
+}
+
+@media screen and (max-width:400px) {
+    article#site > div div {
+        width: 100%;
     }
 }
 
@@ -260,6 +290,15 @@ div.chart {
     clear: both;
 }
 
+@media screen and (max-width:768px) {
+    #map {
+        display: none;
+    }
+
+    #map_table {
+        display: none;
+    }
+}
 
 /*
 標題
@@ -282,6 +321,10 @@ h2.chart {
     margin: 55px 0 5px 0;
 }
 
+h3{
+    margin: 17px 0 17px 0;
+}
+
 
 /*
 搜尋區
@@ -295,20 +338,51 @@ label {
     margin-top: 6px;
 }
 
-#condition{
-    overflow:hidden;
+#condition {
+    overflow: hidden;
+    margin-top: 10px;
 }
 
 #condition form {
     width: 30%;
     height: auto;
-    padding-bottom: 10px;
-    margin: 0 0 0 2.5%;
+    margin-bottom: 10px;
+    margin-left: 2.5%;
     float: left;
 }
 
 #condition form:nth-of-type(3) label {
     width: 30%;
+}
+
+@media screen and (max-width:825px) {
+    #condition form{
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        height: 57px;
+        overflow: hidden;
+        position: relative;
+    }
+    #condition form div.hamburger{
+        position: absolute;
+        pointer-events:none;
+        top: 18.5px;
+        right: 20px;
+        height: 20px;
+        width: 24px;
+        background: linear-gradient(#000 50%, #fff 50%);
+        background-size: 100% 8px;
+    }
+    #condition form.open{
+        height: auto;
+    }
+    #condition h3{
+        cursor: pointer;
+        box-shadow: 0 10px 0px 0px #eee, 0 -10px 0px 0px #eee;
+        background-color: #eee;
+        border-radius: 5px;
+    }
 }
 
 .form-inline input.form-control, .form-inline select.form-control {
@@ -338,19 +412,34 @@ button.send {
     font-size: 17px;
 }
 
-.sample{
-    height:auto;
-    margin:20px 0 20px 0;
-    padding-left:100px;
+.sample {
+    height: auto;
+    margin: 20px 0 20px 0;
+    padding-left: 100px;
 }
 
-.sample button{
-    min-width:150px;
-    margin-right:30px;
+.sample button {
+    width: auto;
+    margin-right: 30px;
 }
 
-.sample span{
-    font-weight:600;
+.sample span {
+    font-weight: 600;
+}
+
+@media screen and (max-width:768px) {
+    .sample{
+        padding-left: 0px;
+    }
+    .sample span{
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .sample button{
+        width: 45%;
+        margin: 5px 0px 5px calc(10% / 3);
+    }
 }
 
 /*
@@ -404,55 +493,46 @@ td {
     background-color: #C9E0F5;
 }
 
-#list td:nth-child(1) {
+#list td:nth-child(1),
+#list th:nth-child(1) {
     width: 10%;
 }
 
-#list td:nth-child(2) {
+#list td:nth-child(2),
+#list th:nth-child(2) {
     width: 40%;
 }
 
-#list td:nth-child(3) {
+#list td:nth-child(3),
+#list th:nth-child(3) {
     width: 15%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-#list td:nth-child(4) {
-    width: 10%;
-}
-
-#list td:nth-child(5) {
-    width: 18%;
-}
-
-#list td:nth-child(6) {
-    width: 7%;
-}
-
-#list th:nth-child(1) {
-    width: 10%;
-}
-
-#list th:nth-child(2) {
-    width: 40%;
-}
-
-#list th:nth-child(3) {
-    width: 15%;
-}
-
+#list td:nth-child(4),
 #list th:nth-child(4) {
     width: 10%;
 }
 
+#list td:nth-child(5),
 #list th:nth-child(5) {
     width: 18%;
 }
 
+#list td:nth-child(6),
 #list th:nth-child(6) {
     width: 7%;
+}
+
+@media screen and (max-width:480px) {
+    #list td:nth-child(1),
+    #list th:nth-child(1),
+    #list td:nth-child(4),
+    #list th:nth-child(4) {
+        display: none;
+    }
 }
 
 
@@ -528,7 +608,7 @@ table.report:nth-of-type(3) tr:nth-child(3) td {
 
 .page {
     width: 85%;
-    height: 34px;
+    height: auto;
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -561,6 +641,12 @@ table.report:nth-of-type(3) tr:nth-child(3) td {
     margin-left: 10px;
 }
 
+@media screen and (max-width:768px) {
+    .page>button{
+        margin: 0 5% 10px 5% !important;
+        width: 40% !important;
+    }
+}
 
 /*
 tab相關
@@ -580,7 +666,7 @@ tab相關
     display: block;
     width: 100px;
     max-width: 10%;
-    height: 100%;
+    height: 36px;
     margin-left: 3%;
     line-height: 36px;
     font-weight: 700;
@@ -597,6 +683,67 @@ tab相關
     background-color: #fff;
     cursor: text;
     box-shadow: 0px -5px 6px #999, -4px -5px 6px #999, 4px -5px 6px #999;
+}
+
+@media screen and (max-width:768px) {
+    .navbar {
+        position:relative;
+        margin-bottom: 20px;
+        height:40px;
+        padding: 0px;
+        border-radius: 5px 5px 5px 5px;
+    }
+    .navbar li{
+        width:100%;
+        margin:0;
+        max-width:100%;
+        box-shadow:none;
+        background-color:#A8D8B9;
+        border-radius:0;
+        border:1px solid #000;
+        border-top:0;
+        display:none;
+    }
+    .navbar li.select{
+        box-shadow:none;
+        display:block;
+        background-color: #fff;
+        cursor: pointer;
+        border-radius: 5px 5px 5px 5px;
+        border:1px #000 solid;
+    }
+    .navbar div:nth-child(2){
+        position:absolute;
+        width:100%;
+        height: auto;
+        z-index:8;
+    }
+    .navbar .triangle{
+        position:absolute;
+        right:20px;
+        top:12px;
+        width:5px;
+        border:5px #fff solid;
+        border-top:8px #000 solid;
+        pointer-events:none;
+        z-index:9;
+    }
+    .navbar.open li{
+        display: block;
+    }
+    .navbar.open li:not(.select):last-of-type{
+        border-radius: 0px 0px 5px 5px;
+    }
+    .navbar.open li.select{
+        position: absolute;
+        top: 0;
+        border-bottom:1px solid #000;
+        cursor:default;
+        border-radius: 5px 5px 0px 0px;
+    }
+    .navbar.open > div:nth-child(2){
+        padding-top: 36px;
+    }
 }
 
 .tabcontainer {

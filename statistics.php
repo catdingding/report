@@ -2,6 +2,7 @@
 <html lang="zh-Hant-TW">
     <head>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
             統計資料
         </title>
@@ -17,13 +18,6 @@
         <script>
             google.charts.load('current', {packages: ["line","corechart","geochart","table"]});
 
-            $(document).on("click", ".navbar li", function() {
-            $(".navbar li").removeClass('select');
-            $(this).addClass("select");
-            $(".tab").removeClass('select');
-            $(".tab:eq(" + $(this).index() + ")").addClass('select');
-            });
-
             var element={
                 type:"",
                 value:""
@@ -33,18 +27,18 @@
 
             function drawChart () {
                 chart(year);
-                chart(month);
-                chart(day);
-                chart(office);
-                chart(topic_cat);
-                chart(gov);
-                chart(area);
                 rank(year);
+                chart(month);
                 rank(month);
+                chart(day);
                 rank(day);
+                chart(office);
                 rank(office);
+                chart(topic_cat);
                 rank(topic_cat);
+                chart(gov);
                 rank(gov);
+                chart(area);
                 rank(area);
             }
 
@@ -55,27 +49,30 @@
         require "header.php";
         ?>
         <ul class="navbar">
-            <li class="select">
-                年份分布
-            </li>
-            <li class="">
-                月份分布
-            </li>
-            <li class="">
-                天數分布
-            </li>
-            <li class="">
-                單位分布
-            </li>
-            <li class="">
-                主題分布
-            </li>
-            <li class="">
-                政府分布
-            </li>
-            <li class="">
-                地區分布
-            </li>
+            <div class="triangle"></div>
+            <div>
+                <li class="select">
+                    年份分布
+                </li>
+                <li class="">
+                    月份分布
+                </li>
+                <li class="">
+                    天數分布
+                </li>
+                <li class="">
+                    單位分布
+                </li>
+                <li class="">
+                    主題分布
+                </li>
+                <li class="">
+                    政府分布
+                </li>
+                <li class="">
+                    地區分布
+                </li>
+            </div>
         </ul>
         <div class="tabcontainer">
             <div class="tab select">

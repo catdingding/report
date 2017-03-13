@@ -2,6 +2,7 @@
 <html lang="zh-Hant-TW">
     <head>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
             公務出國報告查詢統計網
         </title>
@@ -21,6 +22,7 @@
         
         function send() {
             page=1;
+            condition.obj={};
             report();
         }
         </script>
@@ -32,6 +34,7 @@
                 require 'form_condition.php';
             ?>
             <form class="form-inline">
+                <div class="hamburger"></div>
                 <h3>
                     搜尋要求
                 </h3>
@@ -61,10 +64,11 @@
             <button class="btn btn-info">
                 上一頁
             </button>
-            <span></span>
+            
             <button class="btn btn-info">
                 下一頁
             </button>
+            <span></span>
         </div>
         <table id="list">
             <thead>
@@ -96,10 +100,11 @@
             <button class="btn btn-info">
                 上一頁
             </button>
-            <span></span>
+            
             <button class="btn btn-info">
                 下一頁
             </button>
+            <span></span>
         </div>
         </div>
         <div id="disqus_thread"></div>

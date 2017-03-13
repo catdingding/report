@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
     <head>
-        <?php
-			require "connect_mysql.php";
-			$element_kind      = htmlentities($_GET['element_kind'], ENT_QUOTES);
-			$element_value     = htmlentities($_GET['element_value'], ENT_QUOTES);
-		?>
         <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
         <title>
-            <?php echo $element_value."公務出國概況"; ?>
         </title>
         <base href="/report/" target="_blank"/>
         <link href="bootstrap.min.css" rel="stylesheet"/>
@@ -21,16 +16,13 @@
         </script>
         <script>
 		    var element={
-            	kind:<?php echo "\"$element_kind\""; ?>,
-            	value:<?php echo "\"$element_value\""; ?>
+            	kind:decodeURI(location.pathname).split('/').slice(-2,-1)[0],
+            	value:decodeURI(location.pathname).split('/').slice(-1)[0]
             }
 
-		    $(document).on("click", ".navbar li", function() {
-	            $(".navbar li").removeClass('select');
-	            $(this).addClass("select");
-	            $(".tab").removeClass('select');
-	            $(".tab:eq(" + $(this).index() + ")").addClass('select');
-            });
+            document.title=element.value+"公務出國概況";
+            condition.obj[element.kind]=element.value;
+            condition.obj['search']='equal';
             
             function drawChart () {
             	for (var key in kind_list) {
@@ -77,7 +69,6 @@
     <body>
         <?php
     		require "header.php";
-    		echo "<input id=" . $element_kind . " type=hidden value=" . $element_value . ">";
     	?>
     	<input type="radio" name="search" style="display:none;" checked="checked" value="equal">
         <ul class="navbar">
