@@ -4,8 +4,8 @@ error_reporting(E_ALL);
 require "simple_html_dom.php";
 require "connect_mysql.php";
 
-$grab_type = 'all';
-//$grab_type='new';
+//$grab_type = 'all';
+$grab_type='new';
 
 $column = ["gov", "id", "plan_name", "report_name", "main_file", "other_file", "report_date", "report_page", "office", "member_name", "member_office", "member_unit", "member_job", "member_level", "member_num", "start_date", "end_date", "area", "visit", "type", "keyword", "note", "topic_cat", "adm_cat", "summary"];
 
@@ -21,6 +21,7 @@ while ($row = $result->fetch()) {
         $page_num++;
     } else if ($grab_type == 'new') {
         $page_num = 1;
+        page_update();
     }
 }
 
@@ -132,7 +133,7 @@ foreach ($list as $tr) {
     $area = $main->children(9)->find("td", 0)->plaintext;
     $area = str_replace("&nbsp;", "", $area);
     $area = str_replace(["，", "、", ";"], ",", $area);
-    $area = str_replace(" ", "", $area);
+    $area = preg_replace('/\s/', "", $area);
     $area = explode(",", $area);
     $area = array_diff($area, [""]);
     $area = implode(",", $area);
@@ -164,22 +165,27 @@ foreach ($list as $tr) {
 }
 
 if ($grab_type == 'all') {
-    if ($page_num >= $maxpage) {
-        $page_num = 0;
+    page_update();
+}
+
+function page_update()
+{
+    global $grab_type,$page_num,$maxpage,$city_number,$db;
+    if ($grab_type == 'all') {
+        if ($page_num >= $maxpage) {
+            $page_num = 1;
+            $city_number++;
+        }
+    } elseif ($grab_type == 'new') {
         $city_number++;
     }
-} elseif ($grab_type == 'new') {
-    $city_number++;
-}
 
-//所有城市的跑完後，回第一個城市繼續跑
-$sql    = "SELECT count(*) FROM gov";
-$result = $db->query($sql);
-$row    = $result->fetch();
-if ($city_number >= $row[0]) {
-    $city_number = 0;
-}
+    //所有城市的跑完後，回第一個城市繼續跑
+    $result = $db->query("SELECT count(*) FROM gov");
+    $row    = $result->fetch();
+    if ($city_number >= $row[0]) {
+        $city_number = 0;
+    }
 
-//更新抓取進度
-$sql = "UPDATE info SET page_num='$page_num',maxpage='$maxpage',cat='$city_number' WHERE type='local' ";
-$db->exec($sql);
+    $db->exec("UPDATE info SET page_num='$page_num',maxpage='$maxpage',cat='$city_number' WHERE type='local' ");
+}
